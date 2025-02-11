@@ -258,7 +258,6 @@ function validateField(inputElement, errorElement) {
       return;
     }
     
-    // Új sor objektum létrehozása
     const newRow = {
       szerzo_nev: szerzoInput.value,
       group: groupInput.value,
@@ -268,103 +267,6 @@ function validateField(inputElement, errorElement) {
       newRow.mu2 = mu2Input.value;
     }
     
-    // Új sor hozzáadása a táblázati adatokhoz, majd újrageneráljuk a táblázatot
-    tableData.push(newRow);
-    generateTable(tableData);
-    
-    // Űrlapmezők ürítése
-    form.reset();
-    
-    // Minden hibaüzenet eltüntetése for ciklussal
-    const errors = document.querySelectorAll('.error');
-    for (let i = 0; i < errors.length; i++) {
-      errors[i].style.display = 'none';
-    }
-  });
-
-  /**
- * Validál egy adott input mezőt.
- * @param {HTMLInputElement} inputElement - Az ellenőrizendő input mező.
- * @param {HTMLElement} errorElement - Az a hibaüzenet eleme, amelyet meg kell jeleníteni hibás esetben.
- * @returns {boolean} True, ha a mező nem üres; egyébként false.
- */
-function validateField(inputElement, errorElement) {
-    errorElement.style.display = 'none';
-    if (inputElement.value === '') {
-      errorElement.style.display = 'block';
-      return false;
-    }
-    return true;
-  }
-  
-  /**
-   * Validálja a második művel kapcsolatos feltételeket.
-   * Ha a jelölőnégyzet be van jelölve, akkor a mu2 mezőnek nem lehet üres.
-   * Ha nincs bejelölve, akkor a mu2 mezőnek üresnek kell lennie.
-   * @returns {boolean} True, ha a validáció sikeres, egyébként false.
-   */
-  function complexValidate() {
-    const checkbox = document.getElementById('masodik');
-    const mu2Input = document.getElementById('mu2');
-    const mu2Error = document.getElementById('error-mu2');
-    const masodikError = document.getElementById('error-masodik');
-    
-    // Hibák törlése
-    mu2Error.style.display = 'none';
-    masodikError.style.display = 'none';
-    
-    if (checkbox.checked) {
-      // Ha bejelöltött, akkor a mu2 nem lehet üres
-      if (mu2Input.value === '') {
-        mu2Error.style.display = 'block';
-        return false;
-      }
-    } else {
-      // Ha nincs bejelölve, akkor a mu2 mezőnek üresnek kell lennie!
-      if (mu2Input.value !== '') {
-        masodikError.style.display = 'block';
-        return false;
-      }
-    }
-    return true;
-  }
-  
-  // Űrlap submit eseményének kezelése
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Űrlap elemek lekérése
-    const szerzoInput = document.getElementById('szerzo_nev');
-    const groupInput = document.getElementById('group');
-    const mu1Input = document.getElementById('mu1');
-    const mu2Input = document.getElementById('mu2');
-    const masodikCheckbox = document.getElementById('masodik');
-    
-    // Hibaüzenet elemek lekérése
-    const szerzoError = document.getElementById('error-szerzo_nev');
-    const groupError = document.getElementById('error-group');
-    const mu1Error = document.getElementById('error-mu1');
-    
-    // Kötelező mezők validálása
-    const validSzerzo = validateField(szerzoInput, szerzoError);
-    const validGroup = validateField(groupInput, groupError);
-    const validMu1 = validateField(mu1Input, mu1Error);
-    const validSecondWork = complexValidate();
-    
-    // Ha bármelyik validáció sikertelen, ne folytassuk
-    if (!(validSzerzo && validGroup && validMu1 && validSecondWork)) {
-      return;
-    }
-    
-    const newRow = {
-      szerzo_nev: szerzoInput.value,
-      group: groupInput.value,
-      mu1: mu1Input.values
-    };
-    if (masodikCheckbox.checked) {
-      newRow.mu2 = mu2Input.value;
-    }
-
     tableData.push(newRow);
     generateTable(tableData);
     form.reset();
@@ -375,5 +277,6 @@ function validateField(inputElement, errorElement) {
       errors[i].style.display = 'none';
     }
   });
+
   
   

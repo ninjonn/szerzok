@@ -2,11 +2,43 @@
 <html lang="en">
 <head>
     <title>Irodalom</title>
-    <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <table>
+            <thead>
+                <tr>
+                    <th>Szerző neve</th>
+                    <th>Csapat</th>
+                    <th colspan="2">Művei</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Vörösmarty Mihály</td><td>romantikus triász</td><td>Zalán futása</td><td>Szózat</td></tr>
+                <tr><td>Móricz Zsigmond</td><td>Nyugat I.</td><td colspan="2">Hét krajcár</td></tr>
+                <tr><td>Illyés Gyula</td><td>Nyugat II.</td><td>Egy mondat a zsarnokságról</td><td>Puszták népe</td></tr>
+                <tr><td>Radnóti Miklós</td><td>Nyugat III.</td><td>Pogány köszöntő</td><td>Járkálj csak, halálraítélt</td></tr>
+            </tbody>
+        </table>
+
+        <form id="form" action="#">
+            <label for="szerzo_nev">Szerző neve:</label><br>
+            <input type="text" id="szerzo_nev" name="szerzo_nev"><br><br>
     
+            <label for="group">Csapat:</label><br>
+            <input type="text" id="group" name="group"><br><br>
+    
+            <label for="mu1">Első mű:</label><br>
+            <input type="text" id="mu1" name="mu1"><br><br>
+    
+            <label for="masodik">Szeretnél megadni második művet is?</label>
+            <input name="masodik" id="masodik" type="checkbox"><br><br>
+
+            <label for="mu2">Második mű:</label><br>
+            <input type="text" id="mu2" name="mu2"><br><br>
+    
+            <button>Hozzáadás</button>
+        </form>
         <script src="main.js"></script>
 </body>
 </html>

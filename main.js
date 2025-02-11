@@ -100,3 +100,87 @@ let tableData = [
   
   generateTable(tableData);
   
+/**
+ * Létrehoz egy dinamikus űrlapot az új sor hozzáadásához.
+ * @returns {HTMLFormElement} A létrehozott űrlap elem.
+ */
+function generateForm() {
+    const form = document.createElement('form');
+    form.id = 'form';
+    form.action = '#';
+    
+    /**
+     * Segédfüggvény űrlap mező létrehozásához.
+     * @param {string} labelText - A mező felirata.
+     * @param {string} inputType - Az input típusa (pl. "text").
+     * @param {string} id - Az input egyedi azonosítója, amelyet a name attribútumként is használ.
+     * @param {string} errorMessage - Hibaüzenet, ha a validáció sikertelen.
+     * @returns {HTMLElement} A mezőt tartalmazó konténer.
+     */
+    function createFormField(labelText, inputType, id, errorMessage) {
+      const div = document.createElement('div');
+      
+      const label = document.createElement('label');
+      label.htmlFor = id;
+      label.textContent = labelText;
+      div.appendChild(label);
+      div.appendChild(document.createElement('br'));
+      
+      const input = document.createElement('input');
+      input.type = inputType;
+      input.id = id;
+      input.name = id;
+      div.appendChild(input);
+      div.appendChild(document.createElement('br'));
+      
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error';
+      errorDiv.id = 'error-' + id;
+      errorDiv.textContent = errorMessage;
+      div.appendChild(errorDiv);
+      
+      return div;
+    }
+    
+    // Kötelező mezők: szerzo_nev, csapat, első mű
+    form.appendChild(createFormField('Szerző neve:', 'text', 'szerzo_nev', 'Kötelező mező!'));
+    form.appendChild(createFormField('Csapat:', 'text', 'group', 'Kötelező mező!'));
+    form.appendChild(createFormField('Első mű:', 'text', 'mu1', 'Kötelező mező!'));
+    
+    // Jelölőnégyzet: Szeretnél megadni második művet is?
+    const masodikDiv = document.createElement('div');
+    const masodikLabel = document.createElement('label');
+    masodikLabel.htmlFor = 'masodik';
+    masodikLabel.textContent = 'Szeretnél megadni második művet is?';
+    masodikDiv.appendChild(masodikLabel);
+    
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = 'masodik';
+    checkbox.name = 'masodik';
+    masodikDiv.appendChild(checkbox);
+    
+    // Hibajelzés a jelölőnégyzet feltételhez (ha mu2 mező kitöltött, de nincs bejelölve)
+    const checkboxError = document.createElement('div');
+    checkboxError.className = 'error';
+    checkboxError.id = 'error-masodik';
+    checkboxError.textContent = 'Második mű megadásához kötelező bejelölni';
+    masodikDiv.appendChild(checkboxError);
+    form.appendChild(masodikDiv);
+    
+    // Második mű mező
+    form.appendChild(createFormField('Második mű:', 'text', 'mu2', 'Ha bejelölted, akkor kötelező kitölteni!'));
+    
+    // Űrlap elküldéséhez gomb
+    const submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.textContent = 'Hozzáadás';
+    form.appendChild(submitButton);
+    
+    document.body.appendChild(form);
+    return form;
+  }
+  
+  // Űrlap létrehozása
+  const form = generateForm();
+  

@@ -28,7 +28,7 @@ function generateTableHeader(table) {
    * @param {HTMLTableElement} table - A táblázat, amelyhez a törzs tartalmát hozzáadja.
    * @param {Array<{szerzo_nev: string, group: string, mu1: string, mu2?: string}>} data - A sorok adatait tartalmazó tömb.
    */
-  function generateTable(data) {
+  function generateTable(table,data) {
     table.innerHTML = ''; 
     generateTableHeader(table);
   
